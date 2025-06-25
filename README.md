@@ -1,8 +1,17 @@
 ## LangGraph Chatbot mini projects
 
+**Prerequisite**
+You will need to have a Gemini API Key in order to run codes in this repository. you can [get it for free in Google AI Studio](https://aistudio.google.com/app/apikey).
+
+Run below 3 commands:
+
 ```bash
 $ git clone https://github.com/sophot/langgraph-projects.git
+$ cd langgraph-projects
+$ cp .env.example .env
 ```
+
+Then copy and paste the API Key to '.env' file.
 
 
 **I. Sync dependencies and update lockfile.**
