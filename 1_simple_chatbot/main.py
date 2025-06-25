@@ -1,4 +1,5 @@
 import os
+import sys
 from dotenv import load_dotenv
 from typing import Annotated
 from typing_extensions import TypedDict
@@ -19,6 +20,7 @@ class State(TypedDict):
 class ChatBotAgent:
     def __init__(self):
         self.llm = init_chat_model(model="google_genai:gemini-2.0-flash")
+        # self.llm = init_chat_model(model="google_genai:gemini-2.5-flash")
         
         self.graph_builder = StateGraph(State)        
         self.graph_builder.add_node("chatbot", self.chatbot)
@@ -43,13 +45,15 @@ class ChatBotAgent:
                     break
                 self.stream_graph_updates(user_input=user_input)
         
+            except KeyboardInterrupt:
+                print("Received interrupt signal. Shutting down...")
+                break
             except:
                 user_input = "Tell me an interesting fact about Cambodia."
                 print("User: ", user_input)
                 self.stream_graph_updates(user_input=user_input)
                 break
         
-
 
 if __name__ == "__main__":
     cba = ChatBotAgent()
