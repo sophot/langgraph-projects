@@ -33,10 +33,47 @@ $ source .venv/bin/activate
 **III. Run**
 Go to any project folder to run to interact with the chatbot.
 
+<hr />
+
 **1. Simple Chatbot [[code]](1_simple_chatbot/main.py)**
 - This chatbot doesn't have memory previous conversation. To the LLM, each question is independent from the other.
+
+This is the graph of our Chatbot app:
+<img src="https://langchain-ai.github.io/langgraph/tutorials/get-started/basic-chatbot.png" alt="chatbot_with_tools_demo_image" style="border: 2px solid #ccc; border-radius: 8px; padding: 4px;" />
+
 ```bash
 $ python 1_simple_chatbot/main.py
 ```
 Output:
 <img src="resources/simple_chatbot.png" alt="simple_chatbot_demo_image" style="border: 2px solid #ccc; border-radius: 8px; padding: 4px;" />
+
+<hr />
+
+**2. Chatbot with Memory [[code]](2_chatbot_with_memory/main.py)**
+- We add a memory to the chatbot, now it remembers the history of past conversations.
+```bash
+$ python 2_chatbot_with_memory/main.py
+```
+Output:
+<img src="resources/chatbot_with_memory.png" alt="chatbot_with_memory_demo_image" style="border: 2px solid #ccc; border-radius: 8px; padding: 4px;" />
+
+<hr />
+
+**3. Chatbot with Tools Calling [[code]](3_chatbot_with_tools/main.py)**
+- Now, we integrate a web search tool. The chatbot can use this tool to find relevant information to provide better responses.
+
+You'll need [Tavily API Key](https://www.tavily.com/) in order to run the code. Tavily is an AI-powered search API talored for LLMs.
+Beside Tavily, there are [other online search tools]((https://python.langchain.com/docs/integrations/tools/)) supported by LangChain/LangGraph.
+
+This is the graph of our Chatbot app:
+<img src="https://langchain-ai.github.io/langgraph/tutorials/get-started/chatbot-with-tools.png" alt="chatbot_with_tools_demo_image" style="border: 2px solid #ccc; border-radius: 8px; padding: 4px;" />
+
+> First, a `ToolNode` is defined, ToolNode is a  node that runs the tools called in the last AIMessage.
+> Then, `conditional_edeges` is defined to route to different nodes depending on the current graph `state`.
+> A `tools_condition` function is also needed for the `chatbot node`. It returns **"tools"** if the chatbot asks to use a tool, and **"END"** if it is fine directly responding. This conditional routing defines the main agent loop.
+
+```bash
+$ python 3_chatbot_with_tools/main.py
+```
+Output:
+<img src="resources/chatbot_with_tool_calling.png" alt="chatbot_with_tools_demo_image" style="border: 2px solid #ccc; border-radius: 8px; padding: 4px;" />
