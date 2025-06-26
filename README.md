@@ -39,6 +39,7 @@ Go to any project folder to run to interact with the chatbot.
 - This chatbot doesn't have memory previous conversation. To the LLM, each question is independent from the other.
 
 This is the graph of our Chatbot app:
+
 <img src="https://langchain-ai.github.io/langgraph/tutorials/get-started/basic-chatbot.png" alt="chatbot_with_tools_demo_image" style="border: 2px solid #ccc; border-radius: 8px; padding: 4px;" />
 
 ```bash
@@ -66,10 +67,11 @@ You'll need [Tavily API Key](https://www.tavily.com/) in order to run the code. 
 Beside Tavily, there are [other online search tools]((https://python.langchain.com/docs/integrations/tools/)) supported by LangChain/LangGraph.
 
 This is the graph of our Chatbot app:
+
 <img src="https://langchain-ai.github.io/langgraph/tutorials/get-started/chatbot-with-tools.png" alt="chatbot_with_tools_demo_image" style="border: 2px solid #ccc; border-radius: 8px; padding: 4px;" />
 
-> First, a `ToolNode` is defined, ToolNode is a  node that runs the tools called in the last AIMessage.
-> Then, `conditional_edeges` is defined to route to different nodes depending on the current graph `state`.
+> First, a `ToolNode` is defined, ToolNode is a  node that runs the tools called in the last AIMessage. <br />
+> Then, `conditional_edeges` is defined to route to different nodes depending on the current graph `state`. <br />
 > A `tools_condition` function is also needed for the `chatbot node`. It returns **"tools"** if the chatbot asks to use a tool, and **"END"** if it is fine directly responding. This conditional routing defines the main agent loop.
 
 ```bash
