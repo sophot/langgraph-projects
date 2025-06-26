@@ -13,6 +13,7 @@ from langchain_tavily import TavilySearch       # **`NEW`**
 
 load_dotenv()
 os.environ["GOOGLE_API_KEY"] = os.getenv("GEMINI_API_KEY")
+os.environ["LANGSMITH_PROJECT"] = "3_chatbot_with_tools"
 
 class State(TypedDict):
     # Messages have the type "list". The `add_messages` function
@@ -30,7 +31,7 @@ class ChatBotAgent:
         self.memory = MemorySaver()
         
         ### Pick a thread to use a the key for the conversation ###
-        self.config = {"configurable": {"thread_id": "1"}}
+        self.config = {"configurable": {"thread_id": "1"},  "run_name": "3_chatbot_with_tools"}
         
         ### Define the web search tool ###
         search_tool = TavilySearch(max_results=2)      # **`NEW`**

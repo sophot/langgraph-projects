@@ -77,3 +77,22 @@ $ python 3_chatbot_with_tools/main.py
 ```
 Output:
 <img src="resources/chatbot_with_tool_calling.png" alt="chatbot_with_tools_demo_image" style="border: 2px solid #ccc; border-radius: 8px; padding: 4px;" />
+
+**LangSmith**
+We can monitor, analyze and debug how the application works with LangSmith. However, you need to have a LangSmith account in order the get the API key. <br />
+Then add below lines to the environment (.env) file.
+```sh
+LANGSMITH_TRACING=true
+LANGSMITH_ENDPOINT="https://api.smith.langchain.com"
+LANGSMITH_API_KEY=
+```
+
+[Click to interact with LangSmith Trace](https://smith.langchain.com/public/7afa02a4-c583-41b7-8fb1-e129e3d379b8/r):
+<img src="resources/langsmith_img.png" alt="chatbot_with_tools_demo_image" style="border: 2px solid #ccc; border-radius: 8px; padding: 4px;" />
+
+
+<hr />
+
+**4. Chatbot with Human-in-the-Loop [[code]](4_chatbot_with_human_in_the_loop/main.py)**
+- Agent can be unreliable and may need human input to sucessfully accomplish tasks.
+- Some actions require human approval before running to ensure that everything is running as intended.

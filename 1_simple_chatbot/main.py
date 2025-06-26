@@ -10,6 +10,8 @@ from langchain.chat_models import init_chat_model
 
 load_dotenv()
 os.environ["GOOGLE_API_KEY"] = os.getenv("GEMINI_API_KEY")
+os.environ["LANGSMITH_PROJECT"] = "1_sample_chatbot"
+
 
 class State(TypedDict):
     # Messages have the type "list". The `add_messages` function
@@ -22,17 +24,20 @@ class ChatBotAgent:
         self.llm = init_chat_model(model="google_genai:gemini-2.0-flash")
         # self.llm = init_chat_model(model="google_genai:gemini-2.5-flash")
         
+        self.config = {"run_name": "1_simple_chatbot"}
+        
         self.graph_builder = StateGraph(State)        
         self.graph_builder.add_node("chatbot", self.chatbot)
         self.graph_builder.add_edge(START, "chatbot")
         
         self.graph = self.graph_builder.compile()
         
+        
     def chatbot(self, state: State):
         return {"messages": [self.llm.invoke(state["messages"])]}
 
     def stream_graph_updates(self, user_input: str):
-        for event in self.graph.stream({"messages": [{"role": "user", "content": user_input}]}):
+        for event in self.graph.stream({"messages": [{"role": "user", "content": user_input}]}, self.config):
             for value in event.values():
                 print("Assistant:", value["messages"][-1].content)
                 

@@ -11,6 +11,7 @@ from langgraph.checkpoint.memory import MemorySaver
 
 load_dotenv()
 os.environ["GOOGLE_API_KEY"] = os.getenv("GEMINI_API_KEY")
+os.environ["LANGSMITH_PROJECT"] = "2_chatbot_with_memory"
 
 class State(TypedDict):
     # Messages have the type "list". The `add_messages` function
@@ -35,7 +36,7 @@ class ChatBotAgent:
         self.graph = self.graph_builder.compile(checkpointer=self.memory)       # **`UPDATE`**
         
         ### Pick a thread to use a the key for the conversation ###
-        self.config = {"configurable": {"thread_id": "1"}}      # **`NEW`**
+        self.config = {"configurable": {"thread_id": "1"}, "run_name": "2_simple_memory"}      # **`NEW`**
         
     def chatbot(self, state: State):
         return {"messages": [self.llm.invoke(state["messages"])]}
