@@ -81,6 +81,7 @@ Output:
 <img src="resources/chatbot_with_tool_calling.png" alt="chatbot_with_tools_demo_image" style="border: 2px solid #ccc; border-radius: 8px; padding: 4px;" />
 
 **LangSmith**
+
 We can monitor, analyze and debug how the application works with LangSmith. However, you need to have a LangSmith account in order the get the API key. <br />
 Then add below lines to the environment (.env) file.
 ```sh
